@@ -1,0 +1,17 @@
+.puzzle-grid {
+  width: 403px;
+  border:2px black solid;
+  float:left;
+}
+
+.puzzle-tile-holder {
+  width: 133px;                      
+  height: 133px;
+  margin: 0px;
+  float:left;
+}
+
+.status-text{
+  font-size:22px;
+  font-weight: bold;
+}

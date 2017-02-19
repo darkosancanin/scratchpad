@@ -1,0 +1,26 @@
+
+<div class="container-fluid">
+  <div class="row align-items-center success-panel" *ngIf="puzzle" [class.invisible]="!puzzle.puzzleState.isSolved">
+    <div class="col-12">
+      Congratulations!, you solved the puzzle in a total of {{ puzzle.puzzleState.totalMoveCount }} moves in {{ puzzle.puzzleState.elapsedSeconds }} seconds.
+    </div>
+  </div>
+</div>
+
+<div class="container main-container">
+  <div class="row align-items-end">
+    <div class="col">
+      <div class="center-content">
+        <img src="./assets/images/isentia_200_200.png">
+        <div class="clearfix"></div>
+        <button type="button" (click)="startGame()" class="btn start-game-button" id="startGame">START GAME</button>
+      </div>
+    </div>
+    <div class="col">
+      <div class="center-content">
+        <app-puzzle #puzzle></app-puzzle>
+      </div>
+    </div>
+  </div>
+</div>
+

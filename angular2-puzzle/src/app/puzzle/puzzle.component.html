@@ -1,0 +1,8 @@
+<div class="puzzle-grid">
+  <div #tileHolder *ngFor="let tileNumber of puzzleState.tileLocations; let tileHolderIndex = index;" id="tileHolder{{tileHolderIndex}}" class="cell" (drop)="onDrop($event, tileHolder, tileHolderIndex)" (dragover)="onDragOver($event, tileHolderIndex)" class="puzzle-tile-holder clearfix">
+    <img id="tile{{tileNumber}}" src="../../assets/images/{{tileNumber}}.png" draggable="true" (dragstart)="onDragStart($event, tileNumber)" />
+  </div>
+</div>
+<div class="status-text clearfix" id="totalMoves">TOTAL MOVES: {{ puzzleState.totalMoveCount }}</div>
+<div class="status-text" id="elapsedTime">ELAPSED TIME: {{ puzzleState.elapsedSeconds }}</div>
+
