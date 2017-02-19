@@ -1,3 +1,2 @@
 # angular2-puzzle
-
-This is a 9 piece puzzle built using Angular2 done for a coding challenge.
+This is a simple 9 piece puzzle done as a coding challenge using Angular2. Run `ng serve` to start.
