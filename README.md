@@ -1,4 +1,4 @@
-# angular2-puzzle
+# Scratchpad
 
 This repo is just a collection of random spikes into new languages, frameworks and libraries. It also includes any sample projects that I'm playing with or any coding challenges or katas. 
 
