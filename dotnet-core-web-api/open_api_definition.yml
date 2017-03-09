@@ -1,0 +1,202 @@
+swagger: '2.0'
+info:
+  title: LX Group Technical Challenge
+  description: |
+    Software Engineering candidates must implement and setup hosting of an API conforming to this API.
+  version: "1.0"
+# the domain of the service
+host: tech-challenge.lx-cloud.com
+#host: localhost:25770
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /api
+produces:
+  - application/json
+paths:
+
+    /reverse-words:
+
+      get:
+        summary: Reverses the letters of each word in a sentence.
+        description: |
+            Note: Punctuation such as full stops, exclamation marks, question marks, double quotes and commas should remain in postion. Apostrophes in the middle or end of a word should be reversed in the same way as other characters.
+
+            **Example 1**
+
+            - Original: `LX's head office is located in Sydney, Australia.`
+            - Reversed: `s'XL daeh eciffo si detacol ni yendyS, ailartsuA.`
+
+            **Example 2**
+
+            - Original: `Is the sentance "Hello World!" is often used in programming examples?`
+            - Reversed: `sI eht ecnatnes "olleH dlroW!" si netfo desu ni gnimmargorp selpmaxe?`
+        parameters:
+            - name: sentence
+              in: query
+              type: string
+              required: true
+
+        responses:
+            200:
+                description: The sentence was successfully processed.
+                schema:
+                    type: string
+                examples:
+                - olleH dlroW!
+
+    /sort-words:
+
+      get:
+        summary: Sorts the letters of each word in a sentence.
+        description: |
+            Note: Punctuation such as full stops, exclamation marks, question marks, double quotes and commas should remain in postion. Apostrophes should be reversed in the same way as other characters.
+
+            **Example 1**
+
+            - Original: `LX's head office is located in Sydney, Australia.`
+            - Reversed: `'LsX adeh ceffio is acdelot in denSyy, Aaailrstu.`
+            
+            '
+
+            **Example 2**
+
+            - Original: `Is the sentance "Hello World!" is often used in programming examples?`
+            - Reversed: `Is eht aceennst "eHllo dlorW!" is efnot desu in aggimmnoprr aeelmpsx?`
+        parameters:
+            - name: sentence
+              in: query
+              type: string
+              required: true
+
+        responses:
+            200:
+                description: The sentence was successfully processed.
+                schema:
+                    type: string
+                examples:
+                - elloH dlorW!
+
+    /calculate-after-tax-income:
+        get:
+            summary: Calculates the annual take home pay for a given salary in Australia.
+            description: |
+                For the purposes of this test use the following tax brackets: 
+                
+                Taxample Income     | Rate
+                ------------------- | -------------
+                $0 - $18,200        | 0%
+                $18,201 - $37,000   | 19%
+                $37,001 - $87,000   | 32.5%
+                $87,001 - $180,000  | 37%
+                Over $180,000       | 45%
+                
+                The Australian tax rules specify that only whole dollars be taxed, e.g. `$87,000.50` is taxed as `$87,000.00`.
+
+                In addition to basic income tax please also apply the medicare levy using the rules.
+
+                Taxample Income     | Rate
+                ------------------- | -------------
+                Up to $21,336       | 0%
+                $21,336 to $26,668  | 10% of amount over $21,336
+                Over $26,668        | 2%
+
+                The medicare levey surcharge can be ignored as the rules for whether or not it applies are beyond the scope of this excersise.
+
+                Superannuation should be calculated as `9.5%` on top of the base salary and rounded to the nearest cent.
+
+                #### Rounding
+                
+                - The ATO have a crazy rule where values above `0.159` are rounded up.
+                - Medicare levy is rounded to the nearest cent.
+                - Total taxes are the sum of income tax and medicare rounded to the nearest whole dollar.
+
+            parameters:
+                - name: annualBaseSalary
+                  description: The base salary in AUD
+                  in: query
+                  type: double
+                  required: true
+
+            responses:
+                200:
+                    description: Take home pay calculation completed successfully.
+                    schema:
+                        $ref: '#/definitions/CalculatedPay'
+                    examples:
+                        {
+                            "baseSalary": 85000,
+                            "superannuation": 8075,
+                            "taxes": {
+                                "income": 19172,
+                                "medicare": 1700,
+                                "total": 20872
+                            },
+                            "postTaxIncome": 64128
+                        }
+
+    /calculate-pre-tax-income-from-take-home:
+        get:
+            summary: Calculates pre tax annual salary required for a desired take home pay.
+            description: |
+                
+                > **This API is optional, you may do it if your still under three hours or if you just enjoy the challenge.**
+
+                The tax calculation rules are the same as the `/api/calculate-after-tax-income` API, please refer to that description for details.
+                
+            parameters:
+                - name: postTaxSalary
+                  description: The desired after tax income in AUD
+                  in: query
+                  type: double
+                  required: true
+
+            responses:
+                200:
+                    description: Take home pay calculation completed successfully.
+                    schema:
+                        $ref: '#/definitions/CalculatedPay'
+                    examples:
+                        {
+                            "baseSalary": 84804,
+                            "superannuation": 8056.38,
+                            "taxes": {
+                                "income": 19108,
+                                "medicare": 1696.08,
+                                "total": 20804
+                            },
+                            "postTaxIncome": 64000
+                        }
+
+definitions:
+
+    TaxBreakdown:
+        type: object
+        properties:
+            income:
+                type: double
+                description: The income tax payable on the annual salary
+            medicare:
+                type: double
+                description: The medicare level payable on the annual salary
+            total:
+                type: double
+                description: The total tax payable annually
+
+    CalculatedPay:
+        type: object
+        properties:
+            baseSalary:
+                type: double
+                description: The pre-tax annual salary (excluding superannuation)
+            superannuation:
+                type: double
+                description: The amount of superannuation payable annually on the base salary
+            taxes:
+                type: object
+                description: The breakdown (TaxBreakdown object) of the payable taxes
+                $ref: '#/definitions:/TaxBreakdown'
+            postTaxIncome:
+                type: double
+                description: The income taken home after all taxes are paid.
