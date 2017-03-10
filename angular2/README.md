@@ -1,3 +1,2 @@
 # angular2
-
-This is just a sample Angular2 app that I originally used to learn and trial the basic concepts of Angular2 with.
+Sample Angular2 app that I originally used to learn and trial the basic concepts of Angular2 with.

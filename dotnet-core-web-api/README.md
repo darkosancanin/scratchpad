@@ -1,5 +1,5 @@
 # dotnet-core-web-api
-This is a .NET Core WebAPI created for a coding challenge. 
+A .NET Core WebAPI created for a coding challenge. 
 
 See [OpenAPI definition](open_api_definition.yml) for more information on requirements.  
   
