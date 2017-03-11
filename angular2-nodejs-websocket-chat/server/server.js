@@ -44,8 +44,9 @@ io.on('connection', function(socket){
   });
 
   socket.on('message', (message) => {
-    console.log(`Message received from the socket id '${socket.id}'.`);
-    io.emit('message', message); 
+    user = _.find(users, { id: socket.id });
+    console.log(`Message received from the socket id '${socket.id}' with the username '${user.username}'. Text: '${message}'`);
+    io.emit('message', { username: user.username, text: message }); 
   });
 });
 

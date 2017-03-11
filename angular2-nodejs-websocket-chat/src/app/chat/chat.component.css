@@ -30,6 +30,7 @@
     margin-left: 220px;
     height: 100%;
     overflow: scroll;
+    padding-bottom:5px;
 }
 .logout-area{
     text-align: right;

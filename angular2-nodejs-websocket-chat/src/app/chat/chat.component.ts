@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChatService, ChatServiceMessage } from '../chat.service'
 import { UserInfoService } from '../user-info.service'
@@ -9,7 +9,8 @@ import { Subscription } from 'rxjs/Rx';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
+  @ViewChild('mainContent') private mainContent: ElementRef;
   private users: any[];
   private messages: any[] = [];
   private messageText: String;
@@ -32,7 +33,7 @@ export class ChatComponent implements OnInit {
 
   sendMessage(){
     if(this.messageText){
-      this.chatService.sendMessage(this.userInfoService.getUsername(), this.messageText);
+      this.chatService.sendMessage(this.messageText);
       this.messageText = "";
     }
   }
@@ -44,5 +45,16 @@ export class ChatComponent implements OnInit {
 
   ngOnDestroy() {
     this.connection.unsubscribe();
+  }
+
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  } 
+
+  scrollToBottom(): void {
+    try {
+      this.mainContent.nativeElement.scrollTop = this.mainContent.nativeElement.scrollHeight;
+    } 
+    catch(err) { console.log(err); }                 
   }
 }

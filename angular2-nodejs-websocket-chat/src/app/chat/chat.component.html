@@ -5,7 +5,7 @@
     <li *ngFor="let user of users">{{ user.username }}</li>
   </ul>
 </div>
-<div class="main-content">
+<div #mainContent class="main-content">
   <div class="logout-area">
     <button type="button" class="btn btn-default btn-sm" (click)="logout()">
       <span class="glyphicon glyphicon-log-out"></span> Log out

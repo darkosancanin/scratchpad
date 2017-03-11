@@ -25,8 +25,8 @@ export class ChatService {
     return observable;
   }
 
-  sendMessage(username: String, text: String){
-    this.socket.emit('message', { username: username, text: text });
+  sendMessage(text: String){
+    this.socket.emit('message', text);
   }
 }
 
