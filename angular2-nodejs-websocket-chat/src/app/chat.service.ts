@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
 
 @Injectable()
 export class ChatService {
   private socket: SocketIOClient.Socket;
-
-  constructor(){
-  }
 
   join(username: String): Observable<ChatServiceMessage>{
     this.socket = io();

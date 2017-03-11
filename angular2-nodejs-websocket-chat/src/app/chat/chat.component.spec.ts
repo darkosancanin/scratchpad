@@ -1,9 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
 import { ChatComponent } from './chat.component';
-
 import { ChatService } from '../chat.service'
 import { UserInfoService } from '../user-info.service'
 

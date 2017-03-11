@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { ChatService, ChatServiceMessage } from '../chat.service'
 import { UserInfoService } from '../user-info.service'
 import { Subscription } from 'rxjs/Rx';
@@ -11,9 +10,9 @@ import { Subscription } from 'rxjs/Rx';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  private users;
+  private users: any[];
   private messages: any[] = [];
-  private messageText;
+  private messageText: String;
   private connection: Subscription;
 
   constructor(private userInfoService: UserInfoService, private chatService: ChatService, private router: Router) { }
