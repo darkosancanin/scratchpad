@@ -10,19 +10,17 @@ import * as io from 'socket.io-client';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
   private socket;
 
-  constructor(private http: Http){
+  constructor(){
     // make test call to node server
-    this.http.get('/test')
-      .map((res:Response) => res.json())
-      .subscribe(res => {
-        this.title = res.data;
-        console.log(res);
-      });
+    // this.http.get('/test')
+    //   .map((res:Response) => res.json())
+    //   .subscribe(res => {
+    //     console.log(res);
+    //   });
     
-    // create test socket.io connection
-    this.socket = io('/');
+    // // create test socket.io connection
+    // this.socket = io('/socket.io');
   }
 }

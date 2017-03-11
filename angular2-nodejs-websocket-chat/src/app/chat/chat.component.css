@@ -1,0 +1,68 @@
+.fixed-nav {
+    background-color: #4D394B;
+    width: 220px;
+    float: left;
+    height: 100%;
+}
+.chat-title {
+    color: #FFFFFF;
+    width: 220px;
+    text-align: center;
+    padding: 5px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.users-title {
+    color: #AB9BA9;
+    width: 220px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.users-list {
+    list-style: none;
+    margin:0px;
+    color:#AB9BA9;
+    padding: 0px 0px 0px 20px;
+    font-size: 14px;
+}
+.main-content {
+    margin-left: 220px;
+    height: 100%;
+    overflow: scroll;
+}
+.logout-area{
+    text-align: right;
+    padding: 5px;
+}
+.message-area{
+    padding:15px;
+}
+.messages {
+    list-style: none;
+    padding: 0px;
+}
+.message-username{
+    font-weight: 900;
+    font-size:15px;
+}
+.message-time{
+    color:#9e9ea6;
+    font-size:12px;
+}
+.search-area {
+    padding: 0px 20px 10px 10px;
+    background-color:#ffffff;
+    position: absolute;
+    bottom: 0;
+}
+.alerts-wrapper{
+    position:relative;
+}
+.alerts-area{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+}

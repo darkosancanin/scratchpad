@@ -1,0 +1,40 @@
+<div class="fixed-nav">
+  <div class="chat-title">node-chat</div>
+  <div class="users-title">USERS <span class="badge">{{ users?.length }}</span></div>
+  <ul class="users-list">
+    <li *ngFor="let user of users">{{ user.username }}</li>
+  </ul>
+</div>
+<div class="main-content">
+  <div class="logout-area">
+    <button type="button" class="btn btn-default btn-sm" (click)="logout()">
+      <span class="glyphicon glyphicon-log-out"></span> Log out
+    </button>
+  </div>
+  <div class="alerts-wrapper" hidden="true">
+    <div class="alerts-area">
+      <div class="alert alert-danger" role="alert">
+       <strong>Warning!</strong> Better check yourself, you're not looking too good.
+      </div>
+      <div class="alert alert-success" role="alert">
+        Well done! You successfully read this important alert message.
+      </div>
+    </div>
+  </div>
+  <div class="message-area">
+    <ul class="messages">
+      <li *ngFor="let message of messages">
+        <span class="message-username">{{ message.username }}</span> <span class="message-time">4:49 PM</span>
+        <p>{{ message.text }}</p>
+      </li>
+    </ul>
+  </div>
+  <div class="search-area">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Enter a message..." [(ngModel)]="messageText" (keyup.enter)="sendMessage()">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="sendMessage()">Send</button>
+      </span>
+    </div>
+  </div>
+</div>
