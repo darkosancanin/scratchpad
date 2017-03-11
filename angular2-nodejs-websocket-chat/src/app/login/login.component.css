@@ -1,3 +1,6 @@
+.login-area {
+    padding-top: 200px;
+}
 .form-area {
     background-color: #EDEDED;
     width: 400px;
@@ -5,7 +8,6 @@
     border-radius: 15px;
     box-shadow:0 1px 0 #cfcfcf;
     margin: 0 auto;
-    margin-top: 200px;
 }
 .title { 
     text-align: center;
