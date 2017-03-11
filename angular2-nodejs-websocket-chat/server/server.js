@@ -41,13 +41,11 @@ io.on('connection', function(socket){
     user = _.find(users, { id: socket.id });
     user.username = username;
     io.emit('users', users); 
-    console.dir(users);
   });
 
   socket.on('message', (message) => {
     console.log(`Message received from the socket id '${socket.id}'.`);
     io.emit('message', message); 
-    console.dir(message);
   });
 });
 

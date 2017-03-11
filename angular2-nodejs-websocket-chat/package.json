@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "heroku-postbuild": "ng build --prod",
+    "start": "node server/server.js",
     "ng": "ng",
     "dev": "concurrently \"ng serve --progress false --proxy-config proxy.conf.json\" \"nodemon server/server.js\"",
     "prod": "ng build --prod && NODE_ENV=production node server/server.js",
@@ -30,13 +32,14 @@
     "rxjs": "^5.1.0",
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
-    "zone.js": "^0.7.6"
-  },
-  "devDependencies": {
+    "zone.js": "^0.7.6",
     "@angular/cli": "1.0.0-rc.1",
     "@angular/compiler-cli": "^2.4.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
+    "typescript": "~2.0.0"
+  },
+  "devDependencies": {
     "codelyzer": "~2.0.0",
     "concurrently": "^3.4.0",
     "jasmine-core": "~2.5.2",
@@ -50,7 +53,6 @@
     "nodemon": "^1.11.0",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
-    "tslint": "~4.4.2",
-    "typescript": "~2.0.0"
+    "tslint": "~4.4.2"
   }
 }
