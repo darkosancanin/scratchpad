@@ -7,45 +7,33 @@ import * as io from 'socket.io-client';
 export class ChatService {
   private socket: SocketIOClient.Socket;
 
-  constructor() {
+  constructor(){
   }
 
-  join(username: String){
+  join(username: String): Observable<ChatServiceMessage>{
     this.socket = io();
+    let observable = new Observable(observer => {
+      this.socket.on('users', data => {
+        observer.next(new ChatServiceMessage('users', data));
+      });
+      this.socket.on('message', data => {
+        observer.next(new ChatServiceMessage('message', data));
+      });
+      return () => {
+        if(this.socket.connected){
+          this.socket.close();
+        }
+      };
+    });
     this.socket.emit('join', username);
-  }
-
-  disconnect(){
-    this.socket.disconnect();
+    return observable;
   }
 
   sendMessage(username: String, text: String){
     this.socket.emit('message', { username: username, text: text });
   }
+}
 
-  getUsers(){
-    let observable = new Observable(observer => {
-      this.socket.on('users-updated', data => {
-        observer.next(data);
-      });
-      return () => {
-        this.socket.disconnect();
-      };
-    });
-    
-    return observable;
-  }
-
-  getMessages(){
-    let observable = new Observable(observer => {
-      this.socket.on('message', data => {
-        observer.next(data);
-      });
-      return () => {
-        this.socket.disconnect();
-      };
-    });
-    
-    return observable;
-  }
+export class ChatServiceMessage{
+  constructor(public event: String, public data: any){}
 }

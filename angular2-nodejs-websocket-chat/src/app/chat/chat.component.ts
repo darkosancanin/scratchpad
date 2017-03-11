@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ChatService } from '../chat.service'
+import { ChatService, ChatServiceMessage } from '../chat.service'
 import { UserInfoService } from '../user-info.service'
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'chat',
@@ -13,17 +14,20 @@ export class ChatComponent implements OnInit {
   private users;
   private messages: any[] = [];
   private messageText;
+  private connection: Subscription;
 
   constructor(private userInfoService: UserInfoService, private chatService: ChatService, private router: Router) { }
 
   ngOnInit() {
-    this.chatService.join(this.userInfoService.getUsername());
-    this.chatService.getUsers().subscribe(users => {
-      this.users = users;
-    });
-    this.chatService.getMessages().subscribe(message => {
-      this.messages.push(message);
-    });
+    this.connection = this.chatService.join(this.userInfoService.getUsername())
+      .subscribe((message: ChatServiceMessage) => {
+        if(message.event === 'users'){
+          this.users = message.data;
+        }
+        else if(message.event === 'message'){
+          this.messages.push(message.data);
+        }
+      });
   }
 
   sendMessage(){
@@ -32,8 +36,11 @@ export class ChatComponent implements OnInit {
   }
 
   logout(){
-    this.userInfoService.logout();
-    this.chatService.disconnect();
+    this.userInfoService.logout();  
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy() {
+    this.connection.unsubscribe();
   }
 }

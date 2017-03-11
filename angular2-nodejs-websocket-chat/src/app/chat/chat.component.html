@@ -31,7 +31,7 @@
   </div>
   <div class="search-area">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Enter a message..." [(ngModel)]="messageText" (keyup.enter)="sendMessage()">
+      <input type="text" class="form-control" placeholder="Enter a message..." [(ngModel)]="messageText" (keyup.enter)="sendMessage()" autofocus>
       <span class="input-group-btn">
         <button class="btn btn-default" type="button" (click)="sendMessage()">Send</button>
       </span>

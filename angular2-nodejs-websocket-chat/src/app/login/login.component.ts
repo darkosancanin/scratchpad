@@ -9,7 +9,7 @@ import { UserInfoService } from '../user-info.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private username;
+  username: String;
 
   constructor(private userInfoService: UserInfoService, private router: Router) {
   }
@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
   }
 
   enter(){
-    this.userInfoService.setUsername(this.username);
-    this.router.navigate(['/chat']);
+    if(this.username){
+      this.userInfoService.setUsername(this.username);
+      this.router.navigate(['/chat']);
+    }
   }
 }

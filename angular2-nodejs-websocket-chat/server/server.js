@@ -17,15 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // point static path to the angular2 dist folder created by `ng build`
 app.use(express.static(path.join(__dirname, '../dist')));
 
-app.get('/test', (req, res) => {
-    res.header('Access-Control-Allow-Origin', "*");
-    res.end(JSON.stringify({data: 'This is a test response from the node server.'}));
+//catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
-
-// catch all other routes and return the index file
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../dist/index.html'));
-// });
 
 var io = socketio(server);
 
@@ -38,14 +33,14 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     console.log(`User disconnected with the socket id '${socket.id}'.`);
     users = _.filter(users, (user) => { return user.id !== socket.id; });
-    io.emit('users-updated', users);
+    io.emit('users', users);
   });
 
   socket.on('join', (username) => {
     console.log(`Join message received from the socket id '${socket.id}' with the username '${username}'.`);
     user = _.find(users, { id: socket.id });
     user.username = username;
-    io.emit('users-updated', users); 
+    io.emit('users', users); 
     console.dir(users);
   });
 

@@ -1,6 +1,6 @@
 <div class="form-area">
   <div class="title">node-chat</div>
-  <input type="text" [(ngModel)]="username" class="form-control input-md chat-input" placeholder="enter your username..." (keyup.enter)="enter()"/>
+  <input type="text" [(ngModel)]="username" class="form-control input-md chat-input" placeholder="enter your username..." (keyup.enter)="enter()" autofocus/>
   <br/>
   <div class="enter-button-area">
     <button class="btn btn-primary" (click)="enter()">enter</button>

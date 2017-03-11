@@ -10,9 +10,10 @@ import { UserInfoService } from '../user-info.service';
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let routerNavigate = jasmine.createSpy("navigate");
+  let routerNavigate;
 
   beforeEach(async(() => {
+    routerNavigate = jasmine.createSpy("navigate");
     TestBed.configureTestingModule({
       imports: [ FormsModule ],
       declarations: [ LoginComponent ],
@@ -34,10 +35,16 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('enterClicked', () => {
+  describe('enter', () => {
     it('should navigate to chat route', () => {
+      component.username = "darko";
       component.enter();
       expect(routerNavigate).toHaveBeenCalledWith(['/chat']);
+    });
+
+    it('should not navigate away if username is not set', () => {
+      component.enter();
+      expect(routerNavigate).toHaveBeenCalledTimes(0);
     });
   });
 });
