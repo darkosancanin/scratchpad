@@ -24,14 +24,17 @@ export class ChatComponent implements OnInit {
           this.users = message.data;
         }
         else if(message.event === 'message'){
+          message.data.datetime = new Date();
           this.messages.push(message.data);
         }
       });
   }
 
   sendMessage(){
-    this.chatService.sendMessage(this.userInfoService.getUsername(), this.messageText);
-    this.messageText = "";
+    if(this.messageText){
+      this.chatService.sendMessage(this.userInfoService.getUsername(), this.messageText);
+      this.messageText = "";
+    }
   }
 
   logout(){

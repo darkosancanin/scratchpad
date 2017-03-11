@@ -56,13 +56,3 @@
     position: absolute;
     bottom: 0;
 }
-.alerts-wrapper{
-    position:relative;
-}
-.alerts-area{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-}

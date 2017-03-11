@@ -11,20 +11,10 @@
       <span class="glyphicon glyphicon-log-out"></span> Log out
     </button>
   </div>
-  <div class="alerts-wrapper" hidden="true">
-    <div class="alerts-area">
-      <div class="alert alert-danger" role="alert">
-       <strong>Warning!</strong> Better check yourself, you're not looking too good.
-      </div>
-      <div class="alert alert-success" role="alert">
-        Well done! You successfully read this important alert message.
-      </div>
-    </div>
-  </div>
   <div class="message-area">
     <ul class="messages">
       <li *ngFor="let message of messages">
-        <span class="message-username">{{ message.username }}</span> <span class="message-time">4:49 PM</span>
+        <span class="message-username">{{ message.username }}</span> <span class="message-time">{{ message.datetime | date:'hh:mm a' }}</span>
         <p>{{ message.text }}</p>
       </li>
     </ul>
